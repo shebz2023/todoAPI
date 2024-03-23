@@ -1,0 +1,462 @@
+swagger: "2.0"
+info:
+  title: Mybrand-Shebelle API
+  description: Welcome to the backend of Mybrand.
+  version: 1.0
+  contact:
+    email: shebelleke@gmail.com
+
+schemes:
+  - http
+  - https
+
+securityDefinitions:
+  Token:
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
+
+paths:
+  /todos:
+    get:
+      tags:
+        - "Todos"
+      summary: "Get all todos"
+      responses:
+        '200':
+          description: "OK"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "string"
+              data:
+                type: "array"
+                items: {}
+          examples:
+            success:
+              status: "success"
+              data: []
+
+    post:
+      tags:
+        - "TODO"
+      summary: "subscribe"
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: "todo"
+          description: "todo object"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              email:
+                type: "string"
+      tags:
+        - "Todos"
+      summary: "Create a todo"
+      security:
+        - Token: []
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: title
+          in: formData
+          description: "Title of the todo"
+          required: true
+          type: string
+        - name: content
+          in: formData
+          description: "Content of the todo"
+          required: true
+          type: string
+        - name: image
+          in: formData
+          description: "Image of the todo"
+          required: true
+          type: file
+      responses:
+        '200':
+          description: "OK"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "string"
+              data:
+                type: "array"
+                items: {}
+          examples:
+            success:
+              status: "success"
+              data: []
+
+  /todos/{id}:
+    get:
+      tags:
+        - "Todos"
+      summary: "Get one todo"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of the todo"
+          required: true
+          type: "string"
+      responses:
+        '200':
+          description: "OK"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "string"
+              data:
+                type: "array"
+                items: {}
+          examples:
+            success:
+              status: "success"
+              data: []
+
+    patch:
+      tags:
+        - "Todos"
+      summary: "Edit a todo"
+      description: "Edit a todo"
+      security:
+        - Token: []
+      consumes:
+        - application/json
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of the todo"
+          required: true
+          type: "string"
+        - name: title
+          in: body
+          description: "todo content"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              title:
+                type: "string"
+              content:
+                type: "string"
+      responses:
+        '200':
+          description: "OK"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "string"
+              data:
+                type: "array"
+                items: {}
+          examples:
+            success:
+              status: "success"
+              data: []
+
+    delete:
+      tags:
+        - "Todos"
+      summary: "Delete a todo"
+      description: "Delete a todo"
+      security:
+        - Token: []
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of the todo"
+          required: true
+          type: "string"
+      responses:
+        '200':
+          description: "OK"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "string"
+              data:
+                type: "array"
+                items: {}
+          examples:
+            success:
+              status: "success"
+              data: []
+
+
+  /subs:
+    post:
+      tags:
+        - "SUBS"
+      summary: "subscribe"
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: "email"
+          description: "Message object"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              email:
+                type: "string"
+      responses:
+        '200':
+          description: "OK"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "string"
+              data:
+                type: "array"
+                items: {}
+          examples:
+            success:
+              status: "success"
+              data: []
+
+    get:
+      tags:
+        - "SUBS"
+      summary: "Get all subs"
+      security:
+        - Token: []
+      responses:
+        '200':
+          description: "OK"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "string"
+              data:
+                type: "array"
+                items: {}
+          examples:
+            success:
+              status: "success"
+              data: []
+
+  /subs/{id}:
+    get:
+      tags:
+        - "SUBS"
+      summary: "Get Subs by id"
+      security:
+        - Token: []
+      description: "Get subs by id"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of the subscriber"
+          required: true
+          type: "string"
+      responses:
+        '200':
+          description: "OK"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "string"
+              data:
+                type: "array"
+                items: {}
+          examples:
+            success:
+              status: "success"
+              data: []
+
+    delete:
+      tags:
+        - "SUBS"
+      summary: "Delete a subscriber"
+      description: "Delete a subscriber"
+      security:
+        - Token: []
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of the subs"
+          required: true
+          type: "string"
+      responses:
+        '200':
+          description: "OK"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "string"
+              data:
+                type: "array"
+                items: {}
+          examples:
+            success:
+              status: "success"
+              data: []
+
+  /users/:
+    get:
+      tags:
+        - "Users"
+      summary: "Get all users"
+      security:
+        - Token: []
+      description: "Get all users"
+      responses:
+        '200':
+          description: "OK"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "string"
+              data:
+                type: "array"
+                items: {}
+          examples:
+            success:
+              status: "success"
+              data: []
+
+  /users/{id}:
+    get:
+      tags:
+        - "Users"
+      summary: "Get user by id"
+      security:
+        - Token: []
+      description: "Get user by id"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of the user"
+          required: true
+          type: "string"
+      responses:
+        '200':
+          description: "OK"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "string"
+              data:
+                type: "array"
+                items: {}
+          examples:
+            success:
+              status: "success"
+              data: []
+
+    delete:
+      tags:
+        - "Users"
+      summary: "Delete user by email"
+      security:
+        - Token: []
+      description: "Delete"
+      parameters:
+        - name: "email"
+          in: "path"
+          description: "Email of the user"
+          required: true
+          type: "string"
+      responses:
+        '200':
+          description: "OK"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "string"
+              data:
+                type: "array"
+                items: {}
+          examples:
+            success:
+              status: "success"
+              data: []
+
+  /signup:
+    post:
+      tags:
+        - "Account"
+      summary: "User SIGN UP"
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: user
+          description: "User object"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              username:
+                type: "string"
+              email:
+                type: "string"
+              password:
+                type: "string"
+      responses:
+        '200':
+          description: "OK"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "string"
+              data:
+                type: "array"
+                items: {}
+          examples:
+            success:
+              status: "success"
+              data: []
+
+  /login:
+    post:
+      tags:
+        - "Account"
+      summary: "User Login"
+      consumes:
+        - application/json
+      parameters:
+        - in: body 
+          name: user
+          description: "User object"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              username:
+                type: "string"
+              password:
+                type: "string"
+      responses:
+        '200':
+          description: "OK"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "string"
+              data:
+                type: "array"
+                items: {}
+          examples:
+            success:
+              status: "success"
+              data: []
