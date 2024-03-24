@@ -71,12 +71,25 @@ const getTodoById = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 exports.getTodoById = getTodoById;
 const updateTodoById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { title, content } = req.body;
+        const { title, content, completed } = req.body;
         const { error } = todos_1.todoVal.validate(req.body);
         if (error) {
             return res.status(400).send({ error: error.details[0].message });
         }
-        const updatedTodo = yield Todo_1.default.findByIdAndUpdate(req.params.id, { title, content }, { new: true });
+        if (!title && !content && !completed) {
+            return res.status(400).send({ error: 'At least one property (title, content, or completed) must be provided' });
+        }
+        const updateObj = {};
+        if (title) {
+            updateObj.title = title;
+        }
+        if (content) {
+            updateObj.content = content;
+        }
+        if (completed) {
+            updateObj.completed = completed;
+        }
+        const updatedTodo = yield Todo_1.default.findByIdAndUpdate(req.params.id, updateObj, { new: true });
         if (!updatedTodo) {
             return res.status(404).json({ error: 'Todo post not found' });
         }

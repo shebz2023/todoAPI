@@ -60,16 +60,30 @@ export const getTodoById = async (req: Request, res: Response) => {
 
 export const updateTodoById = async (req: Request, res: Response) => {
   try {
-    const { title, content } = req.body;
+    const { title, content, completed } = req.body;
     const { error } = todoVal.validate(req.body);
     if (error) {
       return res.status(400).send({ error: error.details[0].message });
     }
 
+    if (!title && !content && !completed ) {
+      return res.status(400).send({ error: 'At least one property (title, content, or completed) must be provided' });
+    }
+
+    const updateObj: any = {};
+    if (title) {
+      updateObj.title = title;
+    }
+    if (content) {
+      updateObj.content = content;
+    }
+    if (completed) {
+      updateObj.completed = completed;
+    }
 
     const updatedTodo = await Todo.findByIdAndUpdate(
       req.params.id,
-      { title, content},
+      updateObj, 
       { new: true }
     );
 

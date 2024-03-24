@@ -5,16 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const Schema = mongoose_1.default.Schema;
-const commentSchema = new Schema({
-    email: {
-        type: String,
-        required: true
-    },
-    comment: {
-        type: String,
-        required: true
-    }
-});
 const todoSchema = new Schema({
     title: {
         type: String,
@@ -23,6 +13,10 @@ const todoSchema = new Schema({
     content: {
         type: String,
         required: true
+    },
+    completed: {
+        type: Boolean,
+        default: false
     }
 });
 const Todo = mongoose_1.default.model('Todo', todoSchema);

@@ -2,16 +2,6 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-const commentSchema = new Schema({
-  email: {
-    type: String,
-    required: true
-  },
-  comment: {
-    type: String,
-    required: true
-  }
-});
 
 const todoSchema = new Schema({
   title: {
@@ -21,6 +11,10 @@ const todoSchema = new Schema({
   content: {
     type: String,
     required: true
+  },
+  completed: {
+    type: Boolean,
+    default: false 
   }
 });
 
