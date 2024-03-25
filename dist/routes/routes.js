@@ -11,11 +11,10 @@ const subs_1 = require("../controllers/subs");
 const router = express_1.default.Router();
 // todos 
 router.get('/todos', todos_1.getAllTodos);
-router.post('/todos', auth_1.authenticateUser, auth_1.authorizeAdmin, todos_1.createTodo);
+router.post('/todos', auth_1.authenticateUser, todos_1.createTodo);
 router.get('/todos/:id', todos_1.getTodoById);
-router.patch('/todos/:id', auth_1.authenticateUser, auth_1.authorizeAdmin, todos_1.updateTodoById);
-router.delete('/todos/:id', auth_1.authenticateUser, auth_1.authorizeAdmin, todos_1.deleteTodoById);
-router.post('/todos/:id/like', auth_1.authenticateUser);
+router.patch('/todos/:id', auth_1.authenticateUser, todos_1.updateTodoById);
+router.delete('/todos/:id', auth_1.authenticateUser, todos_1.deleteTodoById);
 // subs
 router.get('/subs', auth_1.authenticateUser, auth_1.authorizeAdmin, subs_1.getAllSubs);
 router.get('/subs/:id', auth_1.authenticateUser, auth_1.authorizeAdmin, subs_1.getSubs);

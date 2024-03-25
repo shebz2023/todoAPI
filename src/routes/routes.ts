@@ -9,11 +9,11 @@ const router = express.Router();
 
 // todos 
 router.get('/todos', getAllTodos);
-router.post('/todos',authenticateUser,authorizeAdmin, createTodo);
+router.post('/todos',authenticateUser, createTodo);
 router.get('/todos/:id', getTodoById);
-router.patch('/todos/:id',authenticateUser,authorizeAdmin, updateTodoById);
-router.delete('/todos/:id',authenticateUser,authorizeAdmin, deleteTodoById);
-router.post('/todos/:id/like',authenticateUser,);
+router.patch('/todos/:id',authenticateUser, updateTodoById);
+router.delete('/todos/:id',authenticateUser, deleteTodoById);
+
 
 // subs
 router.get('/subs',authenticateUser,authorizeAdmin,getAllSubs);
